@@ -1,5 +1,4 @@
 omega = 1
-id = 33
 
 [Mesh]
   [gmg]
@@ -52,7 +51,10 @@ id = 33
     type = FunctionValuePostprocessor
     function = df_dy
   []
-
+  [omega]
+    type=ConstantPostprocessor
+    value = ${omega}
+  []
 []
 
 [VectorPostprocessors]
@@ -73,5 +75,4 @@ id = 33
 [Outputs]
   execute_on = timestep_end
   csv = true
-  file_base = forward_${id}
 []

@@ -5,7 +5,8 @@
 [Samplers]
   [omega_sampler]
     type = InputMatrix
-    matrix = '0 2; 1 3; 2 5'
+    #omega;
+    matrix = '2; 3; 5'
     min_procs_per_row = 1
     execute_on = 'PRE_MULTIAPP_SETUP'
   []
@@ -17,7 +18,7 @@
     input_files = forward.i
     sampler = omega_sampler
     ignore_solve_not_converge = true
-    mode = batch-reset
+    mode = normal    #This is the only mode that works.  batch-reset will only transfer data to first sample
     min_procs_per_app = 1
   []
 []
@@ -27,7 +28,7 @@
     type = MultiAppSamplerControl
     multi_app = forward
     sampler = omega_sampler
-    param_names = 'id omega'
+    param_names = 'omega'
   []
 []
 
