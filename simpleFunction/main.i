@@ -13,7 +13,7 @@
 []
 [Executioner]
   type = Optimize
-  tao_solver = taonm #taobqnktr
+  tao_solver = taobqnktr
   petsc_options_iname = '-tao_gatol'
   petsc_options_value = '1e-8 '
   verbose = true
@@ -39,7 +39,7 @@
     type = MultiAppReporterTransfer
     from_multi_app = forward_sampler
     from_reporters = 'sum_objectives/value
-                      grad_f/grad_f'
+                      row_sum/sum'
     to_reporters = 'OptimizationReporter/obj_value
                     OptimizationReporter/grad_vals'
   []

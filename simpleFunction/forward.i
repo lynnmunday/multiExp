@@ -41,7 +41,7 @@ omega = 1
     type = FunctionValuePostprocessor
     function = obj_func
     execute_on = 'INITIAL TIMESTEP_END'
-    outputs = console
+    # outputs = console
   []
   [df_dx]
     type = FunctionValuePostprocessor

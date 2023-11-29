@@ -83,35 +83,30 @@
   []
 []
 
-[VectorPostprocessors]
-  [grad_f]
-    type = ConstantVectorPostprocessor
-    vector_names = 'grad_f'
-    value = '1 1'
-    execute_on = initial
-    #outputs = none
-  []
-[]
 ##---------------------------------------
 # This will be more the more general way I need a way to sum the reporter values returned
-# [Transfers]
-#   #these have to be collected from all of the subapps.
-#   [fromForward]
-#     type = SamplerReporterTransfer
-#     from_multi_app = forward
-#     sampler = omega_sampler
-#     stochastic_reporter = storage
-#     from_reporter = 'obj_pp/value grad_f/grad_f'
-#   []
-# []
-# [Reporters]
-#   [storage]
-#     type = StochasticReporter
-#     execute_on = 'initial timestep_end'
-#     parallel_type = ROOT
-#   []
-# []
-
+[Transfers]
+  #these have to be collected from all of the subapps.
+  [fromForward]
+    type = SamplerReporterTransfer
+    from_multi_app = forward
+    sampler = omega_sampler
+    stochastic_reporter = storage
+    from_reporter = 'obj_pp/value grad_f/grad_f'
+  []
+[]
+[Reporters]
+  [storage]
+    type = StochasticReporter
+    execute_on = 'initial timestep_end'
+    parallel_type = ROOT
+  []
+  [row_sum]
+    type = VectorOfVectorRowSum
+    name = sum
+    reporter_vector_of_vectors = "storage/fromForward:grad_f:grad_f"
+  []
+[]
 ##---------------------------------------
 
 [Outputs]
